@@ -60,6 +60,6 @@ class Formatter:
                 sec_production: Production = Production(sec_token, alphas)
                 self._language.add_production(sec_production)
 
-        print(self._language)
+        print('ola' + self._language.to_string())
         print('-----------------------------------------------------------------')
         return self._language
