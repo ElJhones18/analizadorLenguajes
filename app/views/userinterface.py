@@ -60,5 +60,6 @@ class UserInterface:
         st.subheader("Imagen a pantalla completa")
         # Cargando la imagen
         # Cambia "example_image.jpg" por la ruta de tu imagen
-        image = Image.open("app\data\gatoaudifonos.jpg")
+        # image = Image.open("app\data\gatoaudifonos.jpg")
+        image = Image.open("app\\data\\gatoaudifonos.jpg")
         st.image(image, use_column_width=True)
