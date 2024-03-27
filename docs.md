@@ -9,11 +9,11 @@ python -m venv .env
 Lo activamos con el siguiente comando:
 
 ```bash
-source .env/bin/activate.bat
+source .env/Scripts/activate
 ```
 
 Para instalar los requerimientos:
 
 ```bash
-pip install -r requirements.txt
+pip install -r reqs.txt
 ```
