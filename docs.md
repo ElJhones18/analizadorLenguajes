@@ -17,3 +17,6 @@ Para instalar los requerimientos:
 ```bash
 pip install -r reqs.txt
 ```
+
+## comando para correr la aplicación 
+streamlit run app/main.py
