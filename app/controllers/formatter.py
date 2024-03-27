@@ -51,12 +51,11 @@ class Formatter:
                 
                 for beta in betas:
                     beta.add_token(sec_token)
-
                 production.add_patterns(betas)
 
                 for alpha in alphas:
                     alpha.add_token(sec_token)
-
+                alphas.append(Pattern([Token('λ', True)]))
                 sec_production: Production = Production(sec_token, alphas)
                 self._language.add_production(sec_production)
 
