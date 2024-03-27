@@ -14,4 +14,4 @@ class Token:
         return self._is_terminal
 
     def __str__(self) -> str:
-        return f'{self._lexema}'
+        return f'{self._lexema} ; {self._is_terminal}'

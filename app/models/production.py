@@ -39,6 +39,16 @@ class Production:
                     return True
         return False
 
+    def remove_pattern(self, pattern: Pattern) -> None:
+        ''' Remove pattern from production. '''
+        self._patterns.remove(pattern)
+
+    def discard_pattern(self, pattern: Pattern) -> Pattern | None:
+        ''' Discard pattern from production. '''
+        for idx, iter_pattern in enumerate(self._patterns):
+            if iter_pattern == pattern:
+                return self._patterns.pop(idx)
+
     def eq_mtoken(self, token: Token) -> bool:
         ''' Function to check if two tokens are equal. '''
         eq_lexemas: bool = token.get_lexema()\

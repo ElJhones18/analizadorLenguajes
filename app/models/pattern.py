@@ -22,6 +22,10 @@ class Pattern:
                 return token
         return None
 
+    def remove_token(self, token: Token) -> None:
+        ''' Remove token from pattern. '''
+        self._tokens.remove(token)
+
     def next_token(self, token: Token) -> Token | None:
         ''' Get next token from pattern. '''
         idx: int | None = self.get_token_index(token)
@@ -49,8 +53,10 @@ class Pattern:
                 return True
         return False
 
-    def get_first(self) -> Token:
+    def get_first(self) -> Token | None:
         ''' Get first token from pattern. '''
+        if len(self._tokens) == 0:
+            return None
         return self._tokens[0]
 
     def eq_token(self, token_a: Token, token_b: Token) -> bool:
