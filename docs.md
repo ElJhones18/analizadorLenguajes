@@ -19,4 +19,11 @@ pip install -r reqs.txt
 ```
 
 ## comando para correr la aplicación 
+
+```bash
 streamlit run app/main.py
+```
+
+```bash
+streamlit run app/views/ui.py
+```
