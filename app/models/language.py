@@ -62,3 +62,17 @@ class Language:
         for production in self._productions:
             prods += f' \n{production}'
         return f'【 name: {self._name} | productions: {prods}\n】'
+    
+    def to_string(self) -> str:
+        ''' Function to return language as string. '''
+        name = f'lang: {self._name}'
+        prods = ''
+        for production in self._productions:
+            patterns = ''
+            for indx, pattern in enumerate(production.get_patterns()):
+                for token in pattern.get_tokens():
+                    patterns += token.get_lexema() + ' '
+                if indx is not len(production.get_patterns()) - 1:
+                    patterns += ' | '
+            prods += production.get_mtoken().get_lexema() + ' -> ' + patterns + '\n'
+        return f'{name} \n{prods}'

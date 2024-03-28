@@ -39,6 +39,20 @@ class Production:
                     return True
         return False
 
+    def remove_pattern(self, pattern: Pattern) -> None:
+        ''' Remove pattern from production. '''
+        self._patterns.remove(pattern)
+
+    def remove_patterns(self) -> None:
+        ''' Remove pattern from production. '''
+        self._patterns = []
+
+    def discard_pattern(self, pattern: Pattern) -> Pattern | None:
+        ''' Discard pattern from production. '''
+        for idx, iter_pattern in enumerate(self._patterns):
+            if iter_pattern == pattern:
+                return self._patterns.pop(idx)
+
     def eq_mtoken(self, token: Token) -> bool:
         ''' Function to check if two tokens are equal. '''
         eq_lexemas: bool = token.get_lexema()\
@@ -46,6 +60,14 @@ class Production:
         are_terminals: bool = token.is_terminal()\
             == self._main_token.is_terminal()
         return eq_lexemas and are_terminals
+    
+    def is_recursive(self) -> bool:
+        ''' Function to check if production is recursive. '''
+        for pattern in self._patterns:
+                if self._main_token.get_lexema() ==\
+                    pattern.get_first().get_lexema():
+                    return True
+        return False
 
     def __str__(self) -> str:
         patts: str = ''

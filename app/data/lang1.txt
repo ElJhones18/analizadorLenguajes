@@ -1,0 +1,3 @@
+lang: Dot I
+A ⟶ A b | A c | A d | e f | g | h
+B ⟶ x | B y | z
