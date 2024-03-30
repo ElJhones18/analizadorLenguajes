@@ -47,10 +47,7 @@ class Formatter:
                     new_patt.add_token(sec_token)
 
                     sec_prod.add_pattern(new_patt)
-                    # patt.remove_token(first_token)
-                    # patt.add_token(sec_token)
 
-                    # main_prod.remove_pattern(patt)
                 else:
                     patt.add_token(sec_token)
             sec_prods_list.append(sec_prod)
