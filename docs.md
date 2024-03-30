@@ -25,5 +25,5 @@ streamlit run app/main.py
 ```
 
 ```bash
-streamlit run app/views/ui.py
+streamlit run app/views/userinterface.py
 ```

@@ -44,6 +44,8 @@ class UserInterface:
             
             st.text(lang_without_recursion.to_string())
 
+
+
             # Input para ingresar texto
             input_text = st.text_area("Ingresa una palabra para analizar si pertenece al lenguaje")
 
