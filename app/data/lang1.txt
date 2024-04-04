@@ -1,3 +1,3 @@
 lang: Lenguaje 1
 A ⟶ A b | A c | A d | e B f | g | h
-B ⟶ x | B y | z
+B ⟶ x | B y | z A

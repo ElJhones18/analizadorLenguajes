@@ -31,7 +31,7 @@ class UserInterface:
             # Si subió un archivo
             if uploaded_file:
                 # Sección para mostrar el texto del archivo
-                st.subheader("Texto del archivo subido")
+                st.subheader("Lenguaje subido")
                 # Se lee el archivo
                 # text = uploaded_file.getvalue().decode("utf-8")
                 text = uploaded_file.read().decode("UTF8")
@@ -60,7 +60,7 @@ class UserInterface:
                     
                     with col2:
                         
-                        if self._formatter.verify_word(input_text, "", self._formatter._language.get_initial_prod().get_mtoken(), False):
+                        if isinstance(self._formatter.verify_word(input_text, "", self._formatter._language.get_initial_prod().get_mtoken(), False), bool):
                             st.subheader("\n\n\n\n\nLa palabra pertenece a la gramática.")
                             st.image("app\data\happycat.gif")                    
                         else: 
