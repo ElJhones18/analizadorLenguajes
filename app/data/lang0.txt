@@ -1,5 +1,4 @@
-lang: Dot VII
-⟨E⟩ ⟶ ⟨A⟩ ( asig ⟨E⟩ ) ?
-⟨A⟩ ⟶ ⟨B⟩ ( int ⟨B⟩ dpt ⟨E⟩ ) *
-⟨B⟩ ⟶ ⟨C⟩ ( opad ⟨C⟩ ) *
-⟨C⟩ ⟶ opad ⟨C⟩ | lit | ide | ap ⟨E⟩ | cp
+lang: Lenguaje 0
+A ⟶ b | c C | d | e B
+B ⟶ x | B y | B z
+C ⟶ 2 | 4 | 6 B
