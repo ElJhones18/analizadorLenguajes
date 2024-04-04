@@ -52,9 +52,9 @@ class UserInterface:
             
             #lo de abajo debe mostrarse solo cuando se presione el botón de verificar
             if submit_button:
-                # Sección para mostrar la imagen
-                st.subheader("Arbol de derivación")
-                # Cargando la imagen
-                # Cambia "example_image.jpg" por la ruta de tu imagen
-                image = Image.open("app\\data\\gatoaudifonos.jpg")
-                st.image(image, use_column_width=True)
+                
+                if self._formatter.verify_word(input_text, "", self._formatter._language.get_initial_prod().get_mtoken(), False):
+                    st.subheader("La palabra pertenece a la gramática.")
+                else: 
+                    st.subheader("La palabra NO pertenece a la gramática.")
+                
