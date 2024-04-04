@@ -1,0 +1,4 @@
+lang: Lenguaje 2
+X ⟶ 2 | 6 | X 3 | Y
+Y ⟶ 5 | 7 6 Y | 1 Z
+Z ⟶ Z 8 | Z 9 | 4 | Y
