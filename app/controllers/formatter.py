@@ -58,8 +58,8 @@ class Formatter:
                 sec_production: Production = Production(sec_token, alphas)
                 self._language.add_production(sec_production)
 
-        print("ola" + self._language.to_string())
-        print("-----------------------------------------------------------------")
+        # print("ola" + self._language.to_string())
+        # print("-----------------------------------------------------------------")
         return self._language
 
     # def verify_word(
@@ -117,7 +117,8 @@ class Formatter:
                     return True
                 else:
                     print("false")
-                    return False
+                    # return False
+                    return t_word
             else:
                 return t_word
         else:
