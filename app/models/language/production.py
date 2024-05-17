@@ -1,6 +1,5 @@
-from models.token import Token
-from models.pattern import Pattern
-
+from .token import Token
+from .pattern import Pattern
 
 class Production:
     ''' Class Production is used to link patterns. '''

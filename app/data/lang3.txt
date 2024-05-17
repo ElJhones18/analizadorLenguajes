@@ -1,0 +1,8 @@
+lang: Lenguaje 3
+S ⟶ S xx | A B C D
+A ⟶ p | B D | A p B | λ
+B ⟶ q E | λ
+E ⟶ C xy xx | B xy xx
+D ⟶ d | λ
+C ⟶ id F
+F ⟶ d S fx | λ

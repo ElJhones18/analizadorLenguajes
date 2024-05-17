@@ -1,9 +1,11 @@
 import streamlit as st
 from PIL import Image
 
+# from controllers.LLchecker import LLchecker
+from controllers.LLchecker import LLchecker
 from controllers.formatter import Formatter
 from controllers.reader import Reader
-from models.language import Language
+from models.language.language import Language
 
 
 class UserInterface:
@@ -11,6 +13,7 @@ class UserInterface:
 
     def __init__(self) -> None:
         self._formatter: Formatter = Formatter()
+        self._LLchecker: LLchecker = LLchecker()
 
     def render(self) -> None:
         ''' Function to renderize the program. '''
@@ -38,33 +41,43 @@ class UserInterface:
                 # Se muestra el texto
                 st.text(text)
                 
-                st.subheader("Lenguaje sin recursion")
                 loader: Reader = Reader()
                 lang_one: Language = loader.str_to_lang(text)
-
-                self._formatter.set_language(lang_one)
-
-                lang_without_recursion: Language = self._formatter.remove_left_recursion()
+                self._LLchecker.set_language(lang_one)
+                extended_grammar: Language = self._LLchecker.extend_grammar()    
                 
-                st.text(lang_without_recursion.to_string())
-
-                # Input para ingresar texto
-                input_text = st.text_area("Ingresa una palabra para analizar si pertenece al lenguaje")
-
-                # Botón para subir texto
-                submit_button = st.button("Verificar")
+                st.subheader("Lenguaje extendido")
                 
-                #lo de abajo debe mostrarse solo cuando se presione el botón de verificar
-                if submit_button:
+                st.text(extended_grammar.to_string())
+                
+                self._LLchecker.check_ll0(0)
+                
+                '''
+                # st.subheader("Lenguaje sin recursion")
+                # loader: Reader = Reader()
+                # lang_one: Language = loader.str_to_lang(text)
+
+                # self._formatter.set_language(lang_one)
+
+                # lang_without_recursion: Language = self._formatter.remove_left_recursion()
+                
+                # st.text(lang_without_recursion.to_string())
+
+                # # Input para ingresar texto
+                # input_text = st.text_area("Ingresa una palabra para analizar si pertenece al lenguaje")
+
+                # # Botón para subir texto
+                # submit_button = st.button("Verificar")
+                
+                # #lo de abajo debe mostrarse solo cuando se presione el botón de verificar
+                # if submit_button:
                     
                     
-                    with col2:
+                #     with col2:
                         
-                        if isinstance(self._formatter.verify_word(input_text, "", self._formatter._language.get_initial_prod().get_mtoken(), False), bool):
-                            st.subheader("\n\n\n\n\nLa palabra pertenece a la gramática.")
-                            st.image("app\data\happycat.gif")                    
-                        else: 
-                            st.subheader("\n\n\n\n\nLa palabra NO pertenece a la gramática.")
-                            st.image("app\data\cat.gif", use_column_width=True)                    
-                        
-                    
+                #         if isinstance(self._formatter.verify_word(input_text, "", self._formatter._language.get_initial_prod().get_mtoken(), False), bool):
+                #             st.subheader("\n\n\n\n\nLa palabra pertenece a la gramática.")
+                #             st.image("app\data\happycat.gif")                    
+                #         else: 
+                #             st.subheader("\n\n\n\n\nLa palabra NO pertenece a la gramática.")
+                #             st.image("app\data\cat.gif", use_column_width=True)                    '''

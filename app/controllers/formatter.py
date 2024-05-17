@@ -1,8 +1,8 @@
-from models.language import Language
+from models.language.language import Language
 
-from models.pattern import Pattern
-from models.production import Production
-from models.token import Token
+from models.language.pattern import Pattern
+from models.language.production import Production
+from models.language.token import Token
 
 
 class Formatter:
@@ -62,7 +62,7 @@ class Formatter:
         # print("-----------------------------------------------------------------")
         return self._language
 
-    # def verify_word(
+    '''# def verify_word(
     #     self, word, g_word, symbol, optional
     # ):
     #     start_gword = len(g_word)
@@ -91,18 +91,20 @@ class Formatter:
     #         if word.startswith(g_word):
     #             return g_word
     #         else:
-    #             return ""
-            
-            
-    def verify_word(
-        self, word: str, g_word: str, symbol: Token, optional: bool
-    ):
+    #             return ""'''
+
+    def verify_word(self, word: str, g_word: str, symbol: Token, optional: bool):
         start_gword: int = len(g_word)
         t_word: str = ""
         if not symbol.is_terminal():
-            if  len(self._language.get_production(symbol.get_lexema2()).get_patterns()) > 1:
+            if (
+                len(self._language.get_production(symbol.get_lexema2()).get_patterns())
+                > 1
+            ):
                 optional = True
-            for pattern in self._language.get_production(symbol.get_lexema2()).get_patterns():
+            for pattern in self._language.get_production(
+                symbol.get_lexema2()
+            ).get_patterns():
                 for i in pattern.get_tokens():
                     t_word = self.verify_word(word, g_word, i, optional)
                     if len(t_word) != 0:
@@ -111,7 +113,10 @@ class Formatter:
                         break
                 if len(g_word) > start_gword:
                     break
-            if symbol.get_lexema2() == self._language.get_initial_prod().get_mtoken().get_lexema2():
+            if (
+                symbol.get_lexema2()
+                == self._language.get_initial_prod().get_mtoken().get_lexema2()
+            ):
                 if len(t_word) == len(word):
                     print("true")
                     return True

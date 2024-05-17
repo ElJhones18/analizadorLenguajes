@@ -1,7 +1,7 @@
-from models.language import Language
-from models.production import Production
-from models.pattern import Pattern
-from models.token import Token
+from models.language.language import Language
+from models.language.production import Production
+from models.language.pattern import Pattern
+from models.language.token import Token
 from data.constants import (
     JSON_URL, TXT_URL, REGEX, UTF8, ARROW, PIPE, SPACE
 )

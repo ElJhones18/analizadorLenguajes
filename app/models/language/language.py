@@ -1,32 +1,35 @@
-from models.production import Production
-from models.token import Token
-
+from .production import Production
+from .token import Token
 
 class Language:
-    ''' Class Language is used to link productions. '''
+    """Class Language is used to link productions."""
 
     def __init__(self, name: str, productions: list[Production] = []) -> None:
         self._name: str = name
         self._productions: list[Production] = productions
 
     def add_production(self, production: Production) -> None:
-        ''' Add production to language. '''
+        """Add production to language."""
         self._productions.append(production)
 
+    def add_extended_production(self, production: Production) -> None:
+        """Add production to language."""
+        self._productions.insert(0, production)
+
     def get_name(self) -> str:
-        ''' Get name from language. '''
+        """Get name from language."""
         return self._name
 
     def get_productions(self) -> list[Production]:
-        ''' Get productions from language. '''
+        """Get productions from language."""
         return self._productions
 
     def set_productions(self, productions: list[Production]) -> None:
-        ''' Set productions to language. '''
+        """Set productions to language."""
         self._productions = productions
 
     def get_production(self, lexema: str) -> Production:
-        ''' Get production from language. '''
+        """Get production from language."""
         for production in self._productions:
             main_token: Token = production.get_mtoken()
             if main_token.get_lexema() == lexema:
@@ -34,19 +37,19 @@ class Language:
         return None
 
     def get_initial_prod(self) -> Production:
-        ''' Get initial production from language. '''
+        """Get initial production from language."""
         return self._productions[0]
 
     def is_initial_prod(self, production: Production) -> bool:
-        ''' Check if production is initial production. '''
+        """Check if production is initial production."""
         return production == self.get_initial_prod()
 
     def is_initial_token(self, token: Token) -> bool:
-        ''' Function to check if token is initial token. '''
+        """Function to check if token is initial token."""
         return token == self.get_initial_prod().get_mtoken()
 
     def get_prods_contains(self, token: Token) -> list[Production]:
-        ''' Get containers production from language. '''
+        """Get containers production from language."""
         container: list[Production] = []
         for production in self._productions:
             if production.include_token(token):
@@ -54,25 +57,25 @@ class Language:
         return container
 
     def set_title(self, title: str) -> None:
-        ''' Function to set title to language. '''
+        """Function to set title to language."""
         self._name = title
 
     def __str__(self) -> str:
-        prods: str = ''
+        prods: str = ""
         for production in self._productions:
-            prods += f' \n{production}'
-        return f'【 name: {self._name} | productions: {prods}\n】'
-    
+            prods += f" \n{production}"
+        return f"【 name: {self._name} | productions: {prods}\n】"
+
     def to_string(self) -> str:
-        ''' Function to return language as string. '''
-        name = f'lang: {self._name}'
-        prods = ''
+        """Function to return language as string."""
+        name = f"lang: {self._name}"
+        prods = ""
         for production in self._productions:
-            patterns = ''
+            patterns = ""
             for indx, pattern in enumerate(production.get_patterns()):
                 for token in pattern.get_tokens():
-                    patterns += token.get_lexema() + ' '
+                    patterns += token.get_lexema() + " "
                 if indx is not len(production.get_patterns()) - 1:
-                    patterns += ' | '
-            prods += production.get_mtoken().get_lexema() + ' -> ' + patterns + '\n'
-        return f'{name} \n{prods}'
+                    patterns += " | "
+            prods += production.get_mtoken().get_lexema() + " -> " + patterns + "\n"
+        return f"{name} \n{prods}"
