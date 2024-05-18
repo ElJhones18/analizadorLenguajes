@@ -3,7 +3,6 @@ from PIL import Image
 
 # from controllers.LLchecker import LLchecker
 from controllers.LLchecker import LLchecker
-from controllers.formatter import Formatter
 from controllers.reader import Reader
 from models.language.language import Language
 
@@ -12,7 +11,6 @@ class UserInterface:
     ''' Class Ui is used to renderize the program. '''
 
     def __init__(self) -> None:
-        self._formatter: Formatter = Formatter()
         self._LLchecker: LLchecker = LLchecker()
 
     def render(self) -> None:

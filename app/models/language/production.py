@@ -7,6 +7,10 @@ class Production:
     def __init__(self, main_token: Token, patterns: list[Pattern] = []) -> None:
         self._main_token: Token = main_token
         self._patterns: list[Pattern] = patterns
+        
+    def get_first_pattern(self) -> Pattern:
+        ''' Get first pattern from production. '''
+        return self._patterns[0]
 
     def add_pattern(self, pattern: Pattern) -> None:
         ''' Add pattern to production. '''
@@ -75,3 +79,15 @@ class Production:
         return (
             f'『mtoken {self._main_token} | patterns ⟨{patts}⟩』'
         )
+        
+    def __eq__(self, other: object) -> bool:
+        if isinstance(other, Production):
+            
+            if len(self._patterns) == len(other.get_patterns()):
+                for i, pattern in enumerate(self._patterns):
+                    if not pattern.__eq__(other.get_patterns()[i]):
+                        return False
+                return self.eq_mtoken(other.get_mtoken())
+            
+            # return self.eq_mtoken(other.get_mtoken()) and 
+        return False

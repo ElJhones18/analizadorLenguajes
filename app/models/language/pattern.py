@@ -70,3 +70,13 @@ class Pattern:
         for token in self._tokens:
             tks += f"\n{token}"
         return f"[pattern: {tks}\n]"
+
+    def __eq__(self, value: object) -> bool:
+        if not isinstance(value, Pattern):
+            return False
+        if len(self._tokens) != len(value.get_tokens()):
+            return False
+        for idx, token in enumerate(self._tokens):
+            if not token.__eq__(value.get_tokens()[idx]):
+                return False
+        return True

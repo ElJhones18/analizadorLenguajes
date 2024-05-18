@@ -21,6 +21,14 @@ class State:
     def add_production(self, production: Production) -> None:
         """Adds a production to the state."""
         self._productions.append(production)
+        
+    def has_production(self, production: Production) -> bool:     
+        """Checks if the state has a production."""
+        return production in self._productions
+        
+    def add_productions(self, productions: list[Production]) -> None:
+        """Adds a list of productions to the state."""
+        self._productions.extend(productions)
 
     def get_name(self) -> str:
         """Returns the name of the state."""
@@ -52,3 +60,16 @@ class State:
         for production in self._productions:
             productions += f"{production}\n"
         return f"State: {self._name},\n Initial: {self._is_initial},\n Productions: \n{productions}"
+    
+    def __eq__(self, other: object) -> bool:
+        """Checks if the state is equal to another state."""
+        if isinstance(other, State):
+            times: int = 0
+            if len(self._productions) == len(other.get_productions()):
+                for prod in self._productions:
+                    for prod2 in other.get_productions():
+                        if prod.__eq__(prod2):
+                            times += 1
+            print("holiwis" + str(self._is_initial == other._is_initial and times == len(self._productions)))
+            return self._is_initial == other._is_initial and times == len(self._productions)
+        return False
