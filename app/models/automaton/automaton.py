@@ -1,5 +1,6 @@
 from models.automaton.state import State
 from models.automaton.transition import Transition
+from typing import Tuple
 
 
 class Automaton:
@@ -19,12 +20,19 @@ class Automaton:
         self._transitions: list[Transition] = transitions
         self._start: State = start
         
+    def fix_names(self):
+        """
+        Fix the names of the states in the automaton.
+        """
+        for i, state in enumerate(self._states):
+            state.set_name("I-" + str(i))
+
     def add_state(self, state: State):
         """
         Add a state to the automaton.
         """
         self._states.append(state)
-        
+
     def set_initial_state(self, state: State):
         """
         Set the initial state of the automaton.
@@ -61,18 +69,12 @@ class Automaton:
         """
         self._transitions = transitions
 
-    def set_start(self, start: State):
-        """
-        Set the start state of the automaton.
-        """
-        self._start = start
-
-    def has_state(self, state: State) -> bool:
+    def has_state(self, state: State) -> Tuple[int, bool]:
         """
         Check if a state is already in the list of states in the automaton.
         """
-        for existing_state in self._states:
+        for index, existing_state in enumerate(self._states):
             # if existing_state == state:
             if existing_state.__eq__(state):
-                return True
+                return index, True
         return False

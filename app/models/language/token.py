@@ -24,4 +24,4 @@ class Token:
         return f'{self._lexema} ; {self._is_terminal}'
     
     def __eq__(self, value: object) -> bool:
-        return self._lexema == value.get_lexema() and self._is_terminal == value.is_terminal()
+        return self._lexema == value.get_lexema() #and self._is_terminal == value.is_terminal()

@@ -70,6 +70,6 @@ class State:
                     for prod2 in other.get_productions():
                         if prod.__eq__(prod2):
                             times += 1
-            print("holiwis" + str(self._is_initial == other._is_initial and times == len(self._productions)))
-            return self._is_initial == other._is_initial and times == len(self._productions)
+            # print("holiwis" + str(self._is_initial == other._is_initial and times == len(self._productions)))
+            return times == len(self._productions)
         return False
