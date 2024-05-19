@@ -19,7 +19,7 @@ class Automaton:
         self._states: list[State] = states
         self._transitions: list[Transition] = transitions
         self._start: State = start
-        
+
     def fix_names(self):
         """
         Fix the names of the states in the automaton.
@@ -68,6 +68,12 @@ class Automaton:
         Set the list of transitions in the automaton.
         """
         self._transitions = transitions
+
+    def add_transition(self, transition: Transition):
+        """
+        Add a transition to the automaton.
+        """
+        self._transitions.append(transition)
 
     def has_state(self, state: State) -> Tuple[int, bool]:
         """

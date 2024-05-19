@@ -80,3 +80,10 @@ class Pattern:
             if not token.__eq__(value.get_tokens()[idx]):
                 return False
         return True
+    
+    def toString(self) -> str:
+        tks: str = ""
+        for token in self._tokens:
+            tks += f"{token.get_lexema()} "
+        
+        return f"{tks}"

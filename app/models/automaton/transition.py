@@ -50,3 +50,9 @@ class Transition:
         Sets the label associated with the transition.
         """
         self.label = label
+        
+    def __str__(self) -> str:
+        """
+        Returns a string representation of the Transition object.
+        """
+        return f'{self.source.get_name()} --- {self.label} ---> {self.target.get_name()}'

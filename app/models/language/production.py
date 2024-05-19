@@ -87,3 +87,10 @@ class Production:
 
             # return self.eq_mtoken(other.get_mtoken()) and
         return False
+
+    def toString(self) -> str:
+        pat: str = f'{self._patterns[0].toString()}'
+        return f"{self._main_token.get_lexema()} --> {pat}"
+    
+    def is_acceptance(self) -> bool:
+        return self.get_first_pattern().get_tokens()[-1].get_lexema() == "."

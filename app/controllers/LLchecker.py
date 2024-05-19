@@ -1,4 +1,5 @@
 import copy
+from models.automaton.transition import Transition
 from models.automaton.state import State
 from models.automaton.automaton import Automaton
 from models.language.language import Language
@@ -33,7 +34,7 @@ class LLchecker:
         # print(ps)
         return self._language
 
-    def check_LR0(self, actual: int, default_prods: list[Production]) -> None:
+    def build_automaton(self, actual: int, default_prods: list[Production], previous: State, moved_with: Token) -> None:
         """
         Checks if the language is LR(0).
 
@@ -68,9 +69,15 @@ class LLchecker:
 
             if not self._automaton.has_state(state):
                 self._automaton.add_state(state)
+                
+                self._automaton.add_transition(Transition(previous, state, moved_with.get_lexema()))
+                
                 posible_transitions = self.check_posible_transitions(state)
             else:
                 # print("YA EXISTE EL ESTADO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+                index, _ = self._automaton.has_state(state)
+                existing_state = self._automaton.get_states()[index]
+                self._automaton.add_transition(Transition(previous, existing_state, moved_with.get_lexema()))
                 return
 
         if not self._automaton.has_state(state):
@@ -81,7 +88,7 @@ class LLchecker:
         if posible_transitions:
             for pt in posible_transitions:
                 defs = self.find_default_prods(pt, state.get_productions())
-                self.check_LR0(actual, defs)
+                self.build_automaton(actual, defs, state, pt)
 
     def move_dot(self, prods: list[Production]) -> None:
         """
@@ -200,3 +207,40 @@ class LLchecker:
             cp: Production = copy.deepcopy(production)
             cp.get_first_pattern().get_tokens().insert(0, Token("•", True))
             self._initial_productions.append(cp)
+
+    def check_LR0_SLR0(self) -> str:
+        """
+        Checks if the language is LR(0) or SLR(0).
+
+        Returns:
+            bool: True if the language is LR(0) or SLR(0), False otherwise.
+        """
+        
+        acceptation_states: list[State] = []
+        for state in self._automaton.get_states():
+            if self.is_acceptation_state(state):
+                acceptation_states.append(state)
+        
+        if len(acceptation_states) != len(self._initial_productions):
+            return "El Lenguaje no es LR(0) ni SLR(0)"
+        
+        for a_state in acceptation_states:
+            if len(a_state.get_productions()) > 1:
+                return "El lenguaje es LR(0)"
+        
+        return "El lenguaje es SLR(0)" 
+    
+    def is_acceptation_state(self, state: State) -> bool:
+        """
+        Checks if a state is an acceptation state.
+
+        Args:
+            state (State): The state to check.
+
+        Returns:
+            bool: True if the state is an acceptation state, False otherwise.
+        """
+        for prod in state.get_productions():
+            if prod.get_first_pattern().get_tokens()[-1].get_lexema() == "•":
+                return True
+        return False

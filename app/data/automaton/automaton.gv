@@ -1,0 +1,96 @@
+// Automaton
+digraph {
+	bgcolor="#0e1117"
+	"I-0" [label="I-0
+
+S --> . E 
+E --> . E + T 
+E --> . T 
+T --> . T * F 
+T --> . F 
+F --> . i 
+F --> . ( E ) 
+" color=white fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-1" [label="I-1
+
+S --> E . 
+E --> E . + T 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-2" [label="I-2
+
+E --> E + . T 
+T --> . T * F 
+T --> . F 
+F --> . i 
+F --> . ( E ) 
+" color=white fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-3" [label="I-3
+
+E --> E + T . 
+T --> T . * F 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-4" [label="I-4
+
+T --> T * . F 
+F --> . i 
+F --> . ( E ) 
+" color=white fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-5" [label="I-5
+
+T --> T * F . 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-6" [label="I-6
+
+F --> i . 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-7" [label="I-7
+
+F --> ( . E ) 
+E --> . E + T 
+E --> . T 
+T --> . T * F 
+T --> . F 
+F --> . i 
+F --> . ( E ) 
+" color=white fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-8" [label="I-8
+
+F --> ( E . ) 
+E --> E . + T 
+" color=white fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-9" [label="I-9
+
+F --> ( E ) . 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-10" [label="I-10
+
+E --> T . 
+T --> T . * F 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-11" [label="I-11
+
+T --> F . 
+" color=green fontcolor=white fontname=Arial margin=0.2 shape=box]
+	"I-0" -> "I-1" [label=E color=white fontcolor=white]
+	"I-1" -> "I-2" [label="+" color=white fontcolor=white]
+	"I-2" -> "I-3" [label=T color=white fontcolor=white]
+	"I-3" -> "I-4" [label="*" color=white fontcolor=white]
+	"I-4" -> "I-5" [label=F color=white fontcolor=white]
+	"I-4" -> "I-6" [label=i color=white fontcolor=white]
+	"I-4" -> "I-7" [label="(" color=white fontcolor=white]
+	"I-7" -> "I-8" [label=E color=white fontcolor=white]
+	"I-8" -> "I-9" [label=")" color=white fontcolor=white]
+	"I-8" -> "I-2" [label="+" color=white fontcolor=white]
+	"I-7" -> "I-10" [label=T color=white fontcolor=white]
+	"I-10" -> "I-4" [label="*" color=white fontcolor=white]
+	"I-7" -> "I-11" [label=F color=white fontcolor=white]
+	"I-7" -> "I-6" [label=i color=white fontcolor=white]
+	"I-7" -> "I-7" [label="(" color=white fontcolor=white]
+	"I-2" -> "I-11" [label=F color=white fontcolor=white]
+	"I-2" -> "I-6" [label=i color=white fontcolor=white]
+	"I-2" -> "I-7" [label="(" color=white fontcolor=white]
+	"I-0" -> "I-10" [label=T color=white fontcolor=white]
+	"I-0" -> "I-11" [label=F color=white fontcolor=white]
+	"I-0" -> "I-6" [label=i color=white fontcolor=white]
+	"I-0" -> "I-7" [label="(" color=white fontcolor=white]
+}

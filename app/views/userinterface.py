@@ -2,6 +2,7 @@ import streamlit as st
 from PIL import Image
 
 # from controllers.LLchecker import LLchecker
+from views.render_automaton import Render_automaton
 from controllers.LLchecker import LLchecker
 from controllers.reader import Reader
 from models.language.language import Language
@@ -48,38 +49,14 @@ class UserInterface:
                 st.subheader("Lenguaje extendido")
                 st.text(extended_grammar.to_string())
 
-                self._LLchecker.check_LR0(0, [])
+                self._LLchecker.build_automaton(0, [], None, None)
                 self._LLchecker._automaton.fix_names()
-                
-                for state in self._LLchecker._automaton.get_states():
-                    print(state)
-                    print("")            
-                """
-                st.subheader("Lenguaje sin recursion")
-                # loader: Reader = Reader()
-                # lang_one: Language = loader.str_to_lang(text)
 
-                # self._formatter.set_language(lang_one)
+                with col2:
 
-                # lang_without_recursion: Language = self._formatter.remove_left_recursion()
-                
-                # st.text(lang_without_recursion.to_string())
-
-                # # Input para ingresar texto
-                # input_text = st.text_area("Ingresa una palabra para analizar si pertenece al lenguaje")
-
-                # # Botón para subir texto
-                # submit_button = st.button("Verificar")
-                
-                # #lo de abajo debe mostrarse solo cuando se presione el botón de verificar
-                # if submit_button:
+                    st.subheader(self._LLchecker.check_LR0_SLR0())
                     
+                    renderer: Render_automaton = Render_automaton(self._LLchecker._automaton)
+                    renderer.render()
                     
-                #     with col2:
-                        
-                #         if isinstance(self._formatter.verify_word(input_text, "", self._formatter._language.get_initial_prod().get_mtoken(), False), bool):
-                #             st.subheader("\n\n\n\n\nLa palabra pertenece a la gramática.")
-                #             st.image("app\data\happycat.gif")                    
-                #         else: 
-                #             st.subheader("\n\n\n\n\nLa palabra NO pertenece a la gramática.")
-                #             st.image("app\data\cat.gif", use_column_width=True)                    """
+                    st.image("app/data/automaton/automaton.gv.svg", use_column_width=True)
